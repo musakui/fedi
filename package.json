@@ -1,0 +1,26 @@
+{
+  "name": "@musakui/fedi",
+  "description": "tools for the fediverse",
+  "keywords": [
+    "ActivityPub"
+  ],
+  "author": "musakui",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/musakui/fedi"
+  },
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "lib"
+  ],
+  "exports": {
+    "./hs": "./lib/hs.js",
+    ".": "./lib/index.js"
+  },
+  "scripts": {
+  },
+  "devDependencies": {
+  }
+}
