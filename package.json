@@ -10,13 +10,16 @@
     "type": "git",
     "url": "https://github.com/musakui/fedi"
   },
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "files": [
     "lib"
   ],
   "exports": {
-    "./hs": "./lib/hs.js",
+    "./hs": {
+      "node": "./lib/hs/node.js",
+      "default": "./lib/hs/index.js"
+    },
     ".": "./lib/index.js"
   },
   "scripts": {
