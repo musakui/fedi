@@ -7,11 +7,12 @@
 	"author": "musakui",
 	"license": "MIT",
 	"repository": "github:musakui/fedi",
-	"version": "0.0.3",
+	"version": "0.0.5",
 	"type": "module",
 	"files": [
 		"lib"
 	],
+	"types": "./lib/types.d.ts",
 	"exports": {
 		"./activitypub": "./lib/activitypub/index.js",
 		"./activitystreams": "./lib/activitystreams/index.js",
@@ -19,7 +20,11 @@
 			"node": "./lib/hs/node.js",
 			"default": "./lib/hs/index.js"
 		},
-		"./webfinger": "./lib/webfinger.js",
+		"./keys": {
+			"node": "./lib/keys/node.js",
+			"default": "./lib/keys/index.js"
+		},
+		"./well-known": "./lib/well-known/index.js",
 		".": "./lib/index.js"
 	},
 	"scripts": {
