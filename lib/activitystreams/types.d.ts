@@ -1,76 +1,44 @@
-/** @link https://www.w3.org/ns/activitystreams#Object */
+import {
+	ACTOR_TYPES,
+	OBJECT_TYPES,
+	ACTIVTY_TYPES,
+	INTRANSITIVE_ACTIVTY_TYPES,
+} from './core'
+
+/** @see https://www.w3.org/ns/activitystreams#Object */
 export interface BaseObject<T = string> {
 	type: T
-	id?: string
+	id?: string | null
 	name?: string
 	summary?: string
-	published?: Date
+	published?: Date | string
+	attachment?: ObjectReference[]
+	to?: ObjectReference | ObjectReference[]
+	cc?: ObjectReference | ObjectReference[]
 }
 
-export interface BaseCollection<T = BaseObject> extends BaseObject {
-	totalItems: number
-	items: T[]
+export type ObjectReference<T = BaseObject> = T | string
+
+export interface BaseCollection<T = ObjectReference> extends BaseObject {
+	items?: T[]
+	totalItems?: number
 }
 
-/** @link https://www.w3.org/ns/activitystreams#Collection */
-export interface Collection extends BaseCollection {
+/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection */
+export interface Collection<T = ObjectReference> extends BaseCollection<T> {
 	type: 'Collection'
 }
 
-/** @link https://www.w3.org/ns/activitystreams#OrderedCollection */
-export interface OrderedCollection extends BaseCollection {
+/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection */
+export interface OrderedCollection<T = ObjectReference> extends BaseCollection<T> {
 	type: 'OrderedCollection'
 }
 
-export type ActorTypes = 'Application' | 'Group' | 'Organization' | 'Person' | 'Service'
+export type ActorTypes = typeof ACTOR_TYPES[number]
+export type ObjectTypes = typeof OBJECT_TYPES[number]
 
-export interface Actor extends BaseObject<ActorTypes> {
-}
+/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-activity */
+export type ActivtyTypes = typeof ACTIVTY_TYPES[number]
 
-export type ActivtyTypes = 'Accept'
-	| 'Add'
-	| 'Announce'
-	| 'Block'
-	| 'Create'
-	| 'Delete'
-	| 'Dislike'
-	| 'Flag'
-	| 'Follow'
-	| 'Ignore'
-	| 'Join'
-	| 'Leave'
-	| 'Like'
-	| 'Reject'
-	| 'Remove'
-	| 'Undo'
-	| 'Update'
-
-/** @link https://www.w3.org/ns/activitystreams#Activity */
-export interface Activity<O = BaseObject, T = BaseObject> extends BaseObject<ActivtyTypes> {
-	object: O
-	target: T
-}
-
-export type IntransitiveActivtyTypes = 'Arrive' | 'Question' | 'Travel'
-
-/** @link https://www.w3.org/ns/activitystreams#IntransitiveActivity */
-export interface IntransitiveActivity<T = BaseObject> extends BaseObject<IntransitiveActivityTypes> {
-	actor: Actor
-	target: T
-}
-
-export type ObjectTypes = 'Article'
-	| 'Audio'
-	| 'Document'
-	| 'Event'
-	| 'Image'
-	| 'Note'
-	| 'Page'
-	| 'Place'
-	| 'Profile'
-	| 'Relationship'
-	| 'Tombstone'
-	| 'Video'
-
-export interface ActivityStreamsObject extends BaseObject<ObjectTypes> {
-}
+/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-intransitiveactivity */
+export type IntransitiveActivtyTypes = typeof INTRANSITIVE_ACTIVTY_TYPES[number]
