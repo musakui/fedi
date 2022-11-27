@@ -4,7 +4,7 @@ import type {
 	ObjectReference,
 	OrderedCollection,
 	Collection,
-} from '../types'
+} from '../activitystreams/types'
 
 /** @see https://www.w3.org/TR/activitypub/#actor-objects */
 export interface Actor extends BaseObject<ActorTypes> {

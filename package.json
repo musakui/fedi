@@ -7,9 +7,10 @@
 	"author": "musakui",
 	"license": "MIT",
 	"repository": "github:musakui/fedi",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"type": "module",
 	"files": [
+		"*.d.ts",
 		"lib"
 	],
 	"types": "./lib/types.d.ts",

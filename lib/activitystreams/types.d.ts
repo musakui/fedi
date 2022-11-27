@@ -3,7 +3,7 @@ import {
 	OBJECT_TYPES,
 	ACTIVTY_TYPES,
 	INTRANSITIVE_ACTIVTY_TYPES,
-} from './core'
+} from './core.js'
 
 /** @see https://www.w3.org/ns/activitystreams#Object */
 export interface BaseObject<T = string> {
