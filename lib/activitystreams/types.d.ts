@@ -5,8 +5,19 @@ import {
 	INTRANSITIVE_ACTIVTY_TYPES,
 } from './core.js'
 
-/** @see https://www.w3.org/ns/activitystreams#Object */
-export interface BaseObject<T = string> {
+export type ContextValue = string | Record<string, string>
+
+/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-link */
+export interface Link<T = 'Link'> {
+	type: T
+	rel?: string | string[]
+	name?: string
+	href?: string
+	mediaType?: string
+}
+
+/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object */
+export interface BaseObject<T = string> extends WithContext {
 	type: T
 	id?: string | null
 	name?: string
@@ -15,6 +26,7 @@ export interface BaseObject<T = string> {
 	attachment?: ObjectReference[]
 	to?: ObjectReference | ObjectReference[]
 	cc?: ObjectReference | ObjectReference[]
+	'@context'?: ContextValue | ContextValue[]
 }
 
 export type ObjectReference<T = BaseObject> = T | string
