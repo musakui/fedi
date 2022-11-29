@@ -17,7 +17,7 @@ export interface Link<T = 'Link'> {
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object */
-export interface BaseObject<T = string> extends WithContext {
+export interface BaseObject<T = string> {
 	type: T
 	id?: string | null
 	name?: string
@@ -46,11 +46,20 @@ export interface OrderedCollection<T = ObjectReference> extends BaseCollection<T
 	type: 'OrderedCollection'
 }
 
+/*
 export type ActorTypes = typeof ACTOR_TYPES[number]
+
 export type ObjectTypes = typeof OBJECT_TYPES[number]
+*/
+
+export type ActorTypes = 'Application' | 'Group' | 'Organization' | 'Person' | 'Service'
+
+export type ObjectTypes = 'Article' | 'Audio' | 'Document' | 'Event' | 'Image' | 'Note' | 'Page' | 'Place' | 'Profile' | 'Relationship' | 'Tombstone' | 'Video'
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-activity */
-export type ActivtyTypes = typeof ACTIVTY_TYPES[number]
+export type ActivtyTypes = 'Accept' | 'Add' | 'Announce' | 'Block' | 'Create' | 'Delete' | 'Dislike' | 'Flag' | 'Follow' | 'Ignore' | 'Join' | 'Leave' | 'Like' | 'Reject' | 'Remove' | 'Undo' | 'Update'
+// export type ActivtyTypes = typeof ACTIVTY_TYPES[number]
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-intransitiveactivity */
-export type IntransitiveActivtyTypes = typeof INTRANSITIVE_ACTIVTY_TYPES[number]
+export type IntransitiveActivtyTypes = 'Arrive' | 'Question' | 'Travel'
+// export type IntransitiveActivtyTypes = typeof INTRANSITIVE_ACTIVTY_TYPES[number]
