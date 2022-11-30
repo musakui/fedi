@@ -1,4 +1,5 @@
 import {
+	COLLECTION_TYPES,
 	ACTOR_TYPES,
 	OBJECT_TYPES,
 	ACTIVTY_TYPES,
@@ -6,6 +7,21 @@ import {
 } from './core.js'
 
 export type ContextValue = string | Record<string, string>
+
+/** @see https://www.w3.org/TR/activitystreams-core/#collections */
+export type CollectionTypes = typeof COLLECTION_TYPES[number]
+
+/** @see https://www.w3.org/TR/activitystreams-core/#object */
+export type ObjectTypes = typeof OBJECT_TYPES[number]
+
+/** @see https://www.w3.org/TR/activitystreams-core/#actors */
+export type ActorTypes = typeof ACTOR_TYPES[number]
+
+/** @see https://www.w3.org/TR/activitystreams-core/#activities */
+export type ActivtyTypes = typeof ACTIVTY_TYPES[number]
+
+/** @see https://www.w3.org/TR/activitystreams-core/#intransitiveactivities */
+export type IntransitiveActivtyTypes = typeof INTRANSITIVE_ACTIVTY_TYPES[number]
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-link */
 export interface Link<T = 'Link'> {
@@ -16,50 +32,54 @@ export interface Link<T = 'Link'> {
 	mediaType?: string
 }
 
-/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object */
-export interface BaseObject<T = string> {
+export interface CoreObject<T = string> {
 	type: T
 	id?: string | null
 	name?: string
 	summary?: string
 	published?: Date | string
-	attachment?: ObjectReference[]
-	to?: ObjectReference | ObjectReference[]
-	cc?: ObjectReference | ObjectReference[]
+
+	/** @see https://www.w3.org/TR/json-ld/#the-context */
 	'@context'?: ContextValue | ContextValue[]
 }
 
-export type ObjectReference<T = BaseObject> = T | string
+export type ObjectReference<T = string> = CoreObject<T> | string
 
-export interface BaseCollection<T = ObjectReference> extends BaseObject {
-	items?: T[]
+export type ObjectReferences<T = string> = ObjectReference<T> | ObjectReference<T>[]
+
+/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object */
+export interface BaseObject<T> extends CoreObject<T> {
+	to?: ObjectReferences
+	cc?: ObjectReferences
+	attachment?: ObjectReference[]
+}
+
+export interface BaseCollection<T = string> extends BaseObject<CollectionTypes> {
+	items?: ObjectReference<T>[]
 	totalItems?: number
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection */
-export interface Collection<T = ObjectReference> extends BaseCollection<T> {
-	type: 'Collection'
+export interface CollectionPageFields {
+	partOf?: ObjectReference<BaseCollection>
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection */
-export interface OrderedCollection<T = ObjectReference> extends BaseCollection<T> {
-	type: 'OrderedCollection'
+export interface OrderedCollectionFields<T> {
+	orderedItems?: ObjectReference<T>[]
 }
 
-/*
-export type ActorTypes = typeof ACTOR_TYPES[number]
-
-export type ObjectTypes = typeof OBJECT_TYPES[number]
-*/
-
-export type ActorTypes = 'Application' | 'Group' | 'Organization' | 'Person' | 'Service'
-
-export type ObjectTypes = 'Article' | 'Audio' | 'Document' | 'Event' | 'Image' | 'Note' | 'Page' | 'Place' | 'Profile' | 'Relationship' | 'Tombstone' | 'Video'
+export interface BaseActivity extends BaseObject<ActivtyTypes | IntransitiveActivtyTypes> {
+	actor?: ObjectReferences<ActorTypes>
+}
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-activity */
-export type ActivtyTypes = 'Accept' | 'Add' | 'Announce' | 'Block' | 'Create' | 'Delete' | 'Dislike' | 'Flag' | 'Follow' | 'Ignore' | 'Join' | 'Leave' | 'Like' | 'Reject' | 'Remove' | 'Undo' | 'Update'
-// export type ActivtyTypes = typeof ACTIVTY_TYPES[number]
+export interface Activity<T = ObjectTypes> extends BaseActivity {
+	type: ActivtyTypes
+	object?: ObjectReferences<T>
+}
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-intransitiveactivity */
-export type IntransitiveActivtyTypes = 'Arrive' | 'Question' | 'Travel'
-// export type IntransitiveActivtyTypes = typeof INTRANSITIVE_ACTIVTY_TYPES[number]
+export interface IntransitiveActivity extends BaseActivity {
+	type: IntransitiveActivtyTypes
+}
