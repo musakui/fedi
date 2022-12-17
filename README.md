@@ -17,7 +17,7 @@ These are the main components. Please suggest more if you think they should be a
 ### [ActivityPub](https://activitypub.rocks) (and ActivityStreams)
 The core protocol for federated social networking. For a quick rundown, this [highly opinionated guide to learning about ActivityPub](https://tinysubversions.com/notes/reading-activitypub) is highly recommended.
 
-Related libraries
+Similar libraries
 - [michaelcpuckett/activitypub-core](https://github.com/michaelcpuckett/activitypub-core)
 - [activitypub-js/activitypub-models](https://github.com/activitypub-js/activitypub-models)
 

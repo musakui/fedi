@@ -1,5 +1,6 @@
 import {
 	COLLECTION_TYPES,
+	COLLECTION_PAGE_TYPES,
 	ACTOR_TYPES,
 	OBJECT_TYPES,
 	ACTIVTY_TYPES,
@@ -10,6 +11,9 @@ export type ContextValue = string | Record<string, string>
 
 /** @see https://www.w3.org/TR/activitystreams-core/#collections */
 export type CollectionTypes = typeof COLLECTION_TYPES[number]
+
+/** @see https://www.w3.org/TR/activitystreams-core/#collections */
+export type CollectionPageTypes = typeof COLLECTION_PAGE_TYPES[number]
 
 /** @see https://www.w3.org/TR/activitystreams-core/#object */
 export type ObjectTypes = typeof OBJECT_TYPES[number]
@@ -25,7 +29,7 @@ export type IntransitiveActivtyTypes = typeof INTRANSITIVE_ACTIVTY_TYPES[number]
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-link */
 export interface Link<T = 'Link'> {
-	type: T
+	type?: T
 	rel?: string | string[]
 	name?: string
 	href?: string
@@ -33,8 +37,9 @@ export interface Link<T = 'Link'> {
 }
 
 export interface CoreObject<T = string> {
-	type: T
+	type?: T
 	id?: string | null
+	url?: string
 	name?: string
 	summary?: string
 	published?: Date | string
@@ -43,40 +48,52 @@ export interface CoreObject<T = string> {
 	'@context'?: ContextValue | ContextValue[]
 }
 
-export type ObjectReference<T = string> = CoreObject<T> | string
+export type ObjectRef<T = string> = CoreObject<T> | string
 
-export type ObjectReferences<T = string> = ObjectReference<T> | ObjectReference<T>[]
+export type ObjectRefs<T = string> = ObjectRef<T> | ObjectRef<T>[]
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object */
 export interface BaseObject<T> extends CoreObject<T> {
-	to?: ObjectReferences
-	cc?: ObjectReferences
-	attachment?: ObjectReference[]
+	to?: ObjectRefs
+	cc?: ObjectRefs
+	attachment?: ObjectRef[]
 }
 
-export interface BaseCollection<T = string> extends BaseObject<CollectionTypes> {
-	items?: ObjectReference<T>[]
+/** @see https://www.w3.org/TR/activitystreams-core/#collections */
+export interface BaseCollection extends BaseObject<CollectionTypes | CollectionPageTypes> {
 	totalItems?: number
+	current?: ObjectRef<CollectionPageTypes>
+	first?: ObjectRef<CollectionPageTypes>
+	last?: ObjectRef<CollectionPageTypes>
+}
+
+/** @see https://www.w3.org/TR/activitystreams-core/#dfn-collectionpage */
+export interface ICollectionPage {
+	partOf?: ObjectRef<CollectionTypes>
+	next?: ObjectRef<CollectionPageTypes>
+	prev?: ObjectRef<CollectionPageTypes>
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection */
-export interface CollectionPageFields {
-	partOf?: ObjectReference<BaseCollection>
+export interface Collection<T> extends BaseCollection {
+	type?: 'Collection'
+	items?: ObjectRef<T>[]
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-orderedcollection */
-export interface OrderedCollectionFields<T> {
-	orderedItems?: ObjectReference<T>[]
+export interface OrderedCollection<T> extends BaseCollection {
+	type?: 'OrderedCollection'
+	orderedItems?: ObjectRef<T>[]
 }
 
 export interface BaseActivity extends BaseObject<ActivtyTypes | IntransitiveActivtyTypes> {
-	actor?: ObjectReferences<ActorTypes>
+	actor?: ObjectRefs<ActorTypes>
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-activity */
 export interface Activity<T = ObjectTypes> extends BaseActivity {
 	type: ActivtyTypes
-	object?: ObjectReferences<T>
+	object?: ObjectRefs<T>
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-intransitiveactivity */
