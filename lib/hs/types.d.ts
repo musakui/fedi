@@ -1,3 +1,5 @@
+import { CoreSigner } from './core'
+
 /**
  * @param {string} data string to hash
  * @param {string} algo hash algorithm
@@ -33,7 +35,8 @@ export interface SignatureField {
 
 export interface KeyFetchOptions {
 	/** signer instance */
-	signer: Signer
+	signer: CoreSigner
+
 	/** additional headers */
 	headers: Record<string, string>
 }
