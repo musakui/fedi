@@ -6,10 +6,12 @@
 
 **Warning** this is still experimental and APIs are expected to change a lot
 
-This project houses the low-level interfaces for [kotori](https://github.com/musakui/kotori) to interact with the Fediverse. It aims to be
+This project houses the low-level interfaces to interact with the Fediverse. It aims to be
 - buildless (ESM)
 - isomorphic (run in browser and Node)
 - typed (with [JSDoc](https://jsdoc.app) annotations and TS declarations)
+
+Documentation will be lacking, so please refer to [kotori](https://github.com/musakui/kotori) for usage examples.
 
 ## Modules
 These are the main components. Please suggest more if you think they should be added.
