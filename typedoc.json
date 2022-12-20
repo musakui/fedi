@@ -1,0 +1,13 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "cleanOutputDir": true,
+  "out": ".docs",
+  "entryPointStrategy": "expand",
+  "entryPoints": ["."],
+  "exclude": ["node_modules/**/*"],
+  "name": "@musakui/fedi",
+  "readme": "./README.md",
+  "navigationLinks": {
+    "GitHub": "https://github.com/musakui/fedi"
+  }
+}

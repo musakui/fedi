@@ -29,7 +29,9 @@
 		".": "./lib/index.js"
 	},
 	"scripts": {
+		"docs:build": "typedoc"
 	},
 	"devDependencies": {
+		"typedoc": "^0.23.23"
 	}
 }

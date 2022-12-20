@@ -2,7 +2,7 @@ import type {
 	BaseObject,
 	ActorTypes,
 	ObjectTypes,
-	ActivityTypes,
+	ActivtyTypes,
 	Collection,
 	OrderedCollection,
 } from '../activitystreams/types'
@@ -17,7 +17,7 @@ export interface SecPublicKey {
 export type AnyCollection<T> = OrderedCollection<T> | Collection<T>
 
 export type ActorCollection = AnyCollection<ActorTypes>
-export type ActivityEndpoint = OrderedCollection<ActivityTypes>
+export type ActivityEndpoint = OrderedCollection<ActivtyTypes>
 
 /** @see https://www.w3.org/TR/activitypub/#actor-objects */
 export interface Actor extends BaseObject<ActorTypes> {
