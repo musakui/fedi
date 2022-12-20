@@ -1,5 +1,9 @@
 {
   "exclude": [
     "node_modules"
-  ]
+  ],
+  "compilerOptions": {
+    "allowJs": true,
+    "strict": false
+  }
 }
