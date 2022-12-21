@@ -7,10 +7,14 @@ import type {
 	ExtendedActivityTypes,
 } from '../activitystreams/types'
 
-/** @see https://w3id.org/security/v1 */
-export interface SecPublicKey {
-	id: string
-	owner: string
+/** @see https://w3c-ccg.github.io/security-vocab/#Key */
+export interface SecurityKey {
+	id?: string | URL
+
+	/** @see https://w3c-ccg.github.io/security-vocab/#owner */
+	owner?: string | URL
+
+	/** @see https://w3c-ccg.github.io/security-vocab/#publicKeyPem */
 	publicKeyPem: string
 }
 
@@ -46,5 +50,5 @@ export interface ActivityPubActor extends CoreObject<ActorTypes> {
 	}
 
 	/** @see https://www.w3.org/TR/activitypub/#authorization */
-	publicKey?: Partial<SecPublicKey>
+	publicKey?: SecurityKey
 }

@@ -38,9 +38,9 @@ export type ObjectRef<T extends string> = string | URL | CoreLink | CoreObject<T
 export type ObjectRefs<T extends string = string> = OneOrMany<ObjectRef<T>>
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-link */
-export interface CoreLink<T extends string = 'Link'> extends BaseEntity {
+export interface CoreLink<T extends OneOrMany<string> = 'Link'> extends BaseEntity {
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-type */
-	type?: OneOrMany<T>
+	type?: T
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-rel */
 	rel?: OneOrMany<string>
@@ -59,9 +59,9 @@ export interface CoreLink<T extends string = 'Link'> extends BaseEntity {
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object */
-export interface CoreObject<T extends string = 'Object'> extends BaseEntity {
+export interface CoreObject<T extends OneOrMany<string> = 'Object'> extends BaseEntity {
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-type */
-	type?: OneOrMany<T>
+	type?: T
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-summary */
 	summary?: string

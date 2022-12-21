@@ -50,10 +50,10 @@ interface MultiChoiceQuestion extends BaseQuestion {
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-question */
-export type Question = SingleChoiceQuestion | MultiChoiceQuestion
+export type QuestionActivity = SingleChoiceQuestion | MultiChoiceQuestion
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-relationship */
-export interface Relationship extends CoreObject<'Relationship'> {
+export interface RelationshipObject extends CoreObject<'Relationship'> {
 	relationship?: CoreRef
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-subject */
@@ -64,34 +64,34 @@ export interface Relationship extends CoreObject<'Relationship'> {
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-profile */
-export interface Profile extends CoreObject<'Profile'> {
+export interface ProfileObject extends CoreObject<'Profile'> {
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-describes */
 	describes?: CoreRef
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-place */
-export interface Place extends CoreObject<'Place'> {
+export interface PlaceObject extends CoreObject<'Place'> {
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-accuracy */
-	accuracy?: Number
+	accuracy?: number
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-altitude */
-	altitude?: Number
+	altitude?: number
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-latitude */
-	latitude?: Number
+	latitude?: number
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-longitude */
-	longitude?: Number
+	longitude?: number
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-radius */
-	radius?: Number
+	radius?: number
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-units */
 	units?: string
 }
 
 /** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-tombstone */
-export interface Tombstone extends CoreObject<'Tombstone'> {
+export interface TombstoneObject extends CoreObject<'Tombstone'> {
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-formertype */
 	formerType?: string | string[]
 
