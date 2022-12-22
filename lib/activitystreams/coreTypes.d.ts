@@ -117,11 +117,17 @@ export interface CoreObject<T extends OneOrMany<string> = 'Object'> extends Base
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-preview */
 	preview?: ObjectRefs
 
+	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-context */
+	context?: ObjectRefs
+
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-audience */
 	audience?: ObjectRefs
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-generator */
 	generator?: ObjectRefs
+
+	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-instrument */
+	instrument?: ObjectRefs
 
 	/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto */
 	attributedTo?: ObjectRefs

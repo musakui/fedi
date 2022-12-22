@@ -1,4 +1,5 @@
 import type {
+	CoreLink,
 	CoreObject,
 	ActorTypes,
 	AnyCollection,
@@ -21,6 +22,10 @@ export interface SecurityKey {
 type AnyCollectionRef<T extends string> = string | URL | AnyCollection<T>
 type ActivityEndpoint = string | URL | OrderedCollection<ExtendedActivityTypes>
 
+/** @see https://www.w3.org/TR/activitystreams-vocabulary/#dfn-mention */
+export interface MentionLink extends CoreLink<'Mention'> {
+}
+
 /** @see https://www.w3.org/TR/activitypub/#actor-objects */
 export interface ActivityPubActor extends CoreObject<ActorTypes> {
 	/** @see https://www.w3.org/TR/activitypub/#preferredUsername */
@@ -41,6 +46,9 @@ export interface ActivityPubActor extends CoreObject<ActorTypes> {
 	/** @see https://www.w3.org/TR/activitypub/#liked */
 	liked?: AnyCollectionRef<ExtendedObjectTypes>
 
+	/** @see https://www.w3.org/TR/activitypub/#streams-property */
+	streams?: AnyCollectionRef<string>[]
+
 	/** @see https://www.w3.org/TR/activitypub/#endpoints */
 	endpoints?: {
 		[key: string]: string | URL | undefined
@@ -51,4 +59,28 @@ export interface ActivityPubActor extends CoreObject<ActorTypes> {
 
 	/** @see https://www.w3.org/TR/activitypub/#authorization */
 	publicKey?: SecurityKey
+
+	/** @see https://www.w3.org/wiki/Activity_Streams_extensions#as:alsoKnownAs_property */
+	alsoKnownAs?: (string | URL)[]
+
+	/** @see https://www.w3.org/wiki/Activity_Streams_extensions#as:manuallyApprovesFollowers */
+	manuallyApprovesFollowers?: boolean
+
+	/** @see https://docs.joinmastodon.org/spec/activitypub/#discoverable */
+	discoverable?: boolean
+
+	/** @see https://docs.joinmastodon.org/spec/activitypub/#suspended */
+	suspended?: boolean
+
+	/** @see https://docs.joinmastodon.org/spec/activitypub/#featured */
+	featured?: AnyCollectionRef<ExtendedObjectTypes>
+
+	/** @see https://docs.joinmastodon.org/spec/activitypub/#featuredTags */
+	featuredTags?: AnyCollectionRef<'Hashtag'>
+
+	/** @see https://misskey-hub.net/ns.html#iscat */
+	isCat?: boolean
 }
+
+export * from './activityTypes'
+export * from './objectTypes'
