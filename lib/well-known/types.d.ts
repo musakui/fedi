@@ -1,10 +1,53 @@
-type NodeInfoProtocols = 'activitypub' | 'diaspora' | 'xmpp'
+import { VERSIONS, PROTOCOLS } from './nodeinfo.js'
+
+type JRDProperties = Record<string, string | null>
+
+export interface JRDLink {
+	/** relation type */
+	rel: string | URL
+
+	/** media type */
+	type?: string
+
+	/** target URI */
+	href?: string | URL
+
+	/** language map of link titles */
+	titles?: Record<string, string>
+
+	/** additional properties */
+	properties?: JRDProperties
+
+	/**
+	 * target URI template
+	 * @see https://www.rfc-editor.org/rfc/rfc6415#section-3.1.1.1
+	 */
+	template?: string
+}
+
+/** @see https://www.rfc-editor.org/rfc/rfc6415#appendix-A */
+export interface JSONResourceDescriptor {
+	/** entity described by the JRD */
+	subject: string
+
+	/** link relations */
+	links?: JRDLink[]
+
+	/** alternate URIs for `subject` */
+	aliases?: (string | URL)[]
+
+	/** additional properties */
+	properties?: JRDProperties
+}
+
+export type NodeInfoVersions = typeof VERSIONS[number]
+export type NodeInfoProtocols = typeof PROTOCOLS[number]
 
 /**
- * @link https://github.com/jhass/nodeinfo/blob/main/schemas/2.1/schema.json
+ * @see https://github.com/jhass/nodeinfo/blob/main/schemas/2.1/schema.json
  */
-export interface NodeInfo {
-	version: '1.0' | '1.1' | '2.0' | '2.1'
+export interface NodeInfoDocument {
+	version: NodeInfoVersions
 	software: {
 		name: string
 		version: string
@@ -27,22 +70,4 @@ export interface NodeInfo {
 		localComments?: number
 	}
 	metadata: Record<string, any>
-}
-
-export interface WebFingerLink {
-	rel: string
-	type?: string
-	href?: string
-	titles?: Record<string, string>
-	properties?: Record<string, string | null>
-}
-
-/**
- * @link https://www.rfc-editor.org/rfc/rfc7033
- */
-export interface WebFinger {
-	subject: string
-	aliases?: string[]
-	properties?: Record<string, string | null>
-	links?: WebFingerLink[]
 }
