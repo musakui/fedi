@@ -84,3 +84,8 @@ export interface ActivityPubActor extends CoreObject<ActorTypes> {
 
 export * from './activityTypes'
 export * from './objectTypes'
+
+export {
+	ExtendedObjectTypes,
+	ExtendedActivityTypes,
+}

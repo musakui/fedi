@@ -1,2 +1,5 @@
-export * from './lib/well-known/index.js'
+export * as JRD from './lib/well-known/jrd.js'
+export * as HostMeta from './lib/well-known/hostmeta.js'
+export * as NodeInfo from './lib/well-known/nodeinfo.js'
+export * as WebFinger from './lib/well-known/webfinger.js'
 export * from './lib/well-known/types'
