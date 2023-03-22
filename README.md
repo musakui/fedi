@@ -21,7 +21,7 @@ The core protocol for federated social networking. For a quick rundown, this [hi
 
 Similar libraries
 - [michaelcpuckett/activitypub-core](https://github.com/michaelcpuckett/activitypub-core)
-- [activitypub-js/activitypub-models](https://github.com/activitypub-js/activitypub-models)
+- [activitypub-js/activitypub-types](https://github.com/SiranWeb/activitypub-types)
 
 ### `.well-known` endpoints
 Some [Well-known URIs](https://en.wikipedia.org/wiki/Well-known_URI) have been defined for easy communication between services. The main ones are [WebFinger](https://webfinger.net) (to lookup handles) and [NodeInfo](https://github.com/jhass/nodeinfo) (server metadata).
